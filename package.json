@@ -1,7 +1,7 @@
 {
   "name": "terminal-pixelscreen",
   "version": "0.0.1",
-  "description": "Creates a terminal pixelscreen, to simulate or display pixelscreen action in the terminal",
+  "description": "Create a terminal pixelscreen.",
   "main": "index.js",
   "repository": {
     "type": "git",
