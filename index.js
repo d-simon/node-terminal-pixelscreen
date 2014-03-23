@@ -7,7 +7,7 @@ function Screen (width, height, spacing) {
     this.height = height || 24;
     this.spacing = spacing || 0;
     this.image = this.generateScreen();
-};
+}
 
 Screen.prototype.Pixel = function (r, g, b) {
     this.r = r || 0;
@@ -34,11 +34,10 @@ Screen.prototype.update = function (array) {
     }
 };
 
-Screen.prototype.updateFromDMXUniverse = function (obj, ledChannels) {
-    var ledChannels = ledChannels || 3;
-    for (channel in obj) {
-        var channel = ~~channel
-          , slot = ~~(channel / ledChannels)
+Screen.prototype.updateFromDMXUniverse = function (obj, channels) {
+    var ledChannels = channels || 3;
+    for (var channel in obj) {
+        var slot = ~~(channel / ledChannels)
           , y = ~~(slot / this.width)
           , x = slot % this.width
           , led = channel % ledChannels;
@@ -60,11 +59,10 @@ Screen.prototype.updateFromDMXUniverse = function (obj, ledChannels) {
             }
         } else {
             // Single channel pixel
-            this.image[y][x].r = obj[channel]
-            this.image[y][x].g = obj[channel]
-            this.image[y][x].b = obj[channel]
+            this.image[y][x].r = obj[channel];
+            this.image[y][x].g = obj[channel];
+            this.image[y][x].b = obj[channel];
         }
-
     };
 };
 
@@ -90,6 +88,6 @@ function repeatStr (str, count) {
         count >>= 1, str += str;
     }
     return result;
-};
+}
 
 module.exports = Screen;
