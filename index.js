@@ -10,8 +10,8 @@ function Screen (width, height, spacing) {
 }
 
 Screen.prototype.Pixel = function (r, g, b) {
-    this.r = r || 0;
-    this.g = g || 0;
+    this.r = r || 0;
+    this.g = g || 0;
     this.b = b || 0;
 };
 
@@ -35,7 +35,7 @@ Screen.prototype.update = function (array) {
 };
 
 Screen.prototype.updateFromDMXUniverse = function (obj, channels) {
-    var ledChannels = channels || 3;
+    var ledChannels = channels || 3;
     for (var channel in obj) {
         var slot = ~~(channel / ledChannels)
           , y = ~~(slot / this.width)
@@ -63,8 +63,18 @@ Screen.prototype.updateFromDMXUniverse = function (obj, channels) {
             this.image[y][x].g = obj[channel];
             this.image[y][x].b = obj[channel];
         }
-    };
+    }
 };
+
+function repeatStr (str, count) {
+    if (count < 1) return '';
+    var result = '';
+    while (count > 0) {
+        if (count & 1) result += str;
+        count >>= 1, str += str;
+    }
+    return result;
+}
 
 Screen.prototype.paint = function () {
     clear();
@@ -79,15 +89,5 @@ Screen.prototype.paint = function () {
         cursor.reset().write('\n'+repeatStr('\n', this.spacing));
     }
 };
-
-function repeatStr (str, count) {
-    if (count < 1) return '';
-    var result = '';
-    while (count > 0) {
-        if (count & 1) result += str;
-        count >>= 1, str += str;
-    }
-    return result;
-}
 
 module.exports = Screen;
